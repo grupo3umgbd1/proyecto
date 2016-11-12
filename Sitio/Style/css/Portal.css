@@ -1,0 +1,701 @@
+	html { overflow: hidden; }
+	*, body { margin: 0; padding: 0; }
+
+	.js-disabled-overlay {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		
+		background: #000;
+		opacity: 0.3;
+		filter: Alpha(Opacity=30)/*{opacityFilterOverlay}*/;
+		/*z-index: 49;*/
+		z-index: 52;
+	}
+
+	#overlaySPIN {
+		position: absolute;
+		display: none;
+		z-index: 53;
+	}
+
+	#MNPOR_CONTAINER { width: 100%; float: left; position: relative; }
+		#topFrame { float: left; width: 100%; 
+			height: 103px; /* 120 - 103 = 17 */
+			//height: 40px;
+			
+			/*Para MNTOP Simplificado*/
+			position: relative;
+			top: 0;
+			left: 0;
+		}
+		#MiddleFrame { float: left; width: 100%; height: 100%; background: white; }
+			#leftFrame { float: left; width: 15%; display: block; 
+			background-color: #c3d3eb; background: #d3dbe5; background: white; }
+			#leftFame html body {
+				border-right: 1px solid #c3d3eb;
+			}
+			#DetailMain { 
+				float: right; width: 85%; display: block; 
+			}
+			#onScreenMessageDialog {
+				width: 300px;
+				position: absolute;
+				border-radius: 10px;
+				font-size: 15px;
+				font-weight: bold;
+				z-index: 53;
+				padding: 0;
+				
+				background: #efefef;
+				background: rgba(255, 255, 255, 0.85);
+				color: #005db2;
+
+				border: 1px solid white;
+				display: none;
+				box-shadow: 1px 1px 6px rgba(0,0,0,0.3);
+				
+				filter: Alpha(Opacity=90)
+			}
+				#onScreenMessageDialog div.MessageBody {
+					float:left;
+					width: 100%;
+					text-align: center;
+					padding-top: 20px;
+					/*padding-bottom: 30px;*/
+					padding-bottom: 20px;
+				}
+					#onScreenMessageDialog input[type=text] {
+						font-family: Arial;
+						font-weight: bold;
+						font-size: 30px;
+						background: white;
+						margin-top: 20px;
+						border-radius: 5px;
+						border: 1px solid orange;
+						color: #800;
+						padding: 0 5px;
+					}
+
+				#onScreenMessageDialog > span {
+					float:left;
+					width: 100%;
+					height: 34px;
+					line-height: 34px;
+					color: white;
+					font-size: 12px;
+					border-top-left-radius: 9px;
+					border-top-right-radius: 9px;
+					background: #20416F;
+					background: #2E4676;
+				}
+				#onScreenMessageDialog span span {
+					float: left;
+					padding: 0 10px;
+				}
+				
+				#onScreenMessageDialog a {
+					float: left;
+					margin: 10px;
+					font-size: 12px;
+					font-weight: normal;
+					text-decoration: none;
+				}
+				
+					#onScreenMessageDialog a img {
+						margin-bottom: 10px;
+						border: 1px solid #333;
+					}
+						#onScreenMessageDialog a:hover img {
+							border: 1px solid red;
+						}
+				
+		
+		#notificationBar {
+			position: fixed;
+			width: 100%;
+			height: 100px;
+			bottom: -100px;
+			left: 0;
+			background: #bbb;
+			background: rgba(0,0,0, 0.5);
+			/*background: rgba(255,255,255, 0.5);*/
+			display: none;
+			z-index: 21;
+		}
+			#notificationBar .controlbar {
+				float: left: width: 100%; height: 20px; 
+				font-size: 12px; color: white; cursor: pointer;
+				line-height: 20px;
+				padding-left: 5px;
+				background: #999;
+				background: rgba(0,0,0, 0.2);
+			}
+			#notificationBar .controlbar .closeButton {
+				float: right; height: 20px; width: 20px; text-align: center;
+
+				background: #888;
+				background: rgba(0,0,0, 0.2);
+			}
+				#notificationBar .controlbar .closeButton a {
+					line-height: 20px;
+				}
+			#notificationBar .controlbar .desc {
+				line-height: 20px;
+				padding: 5px 10px;
+				position: absolute;
+				width: 70px;
+				height: 20px;
+				top: -5px;
+				
+			
+			}
+		
+		#onScreenHelp {
+			display: none;
+			position: fixed;
+			z-index: 53;
+			width: 100%;
+			height: 100%;
+
+			font-size: 50px;
+			color: white;
+			top: 0;
+			left: 0;
+		}
+
+		
+		#blockingDiv {
+			position: relative; z-index: 100; 
+			background: #FFFFFF;
+			background: rgba(255,255,255,0.7);
+		}
+			#TRNWaitingIcon {
+				width: 160px;
+				height: 60px;
+				position:absolute; cursor: move;
+			}
+				#TRNWaitingIcon img {
+					width: 80px;
+					width: 73px;
+					height: 67px;
+					float: none;
+					margin: auto;
+				}
+				#TRNWaitingIcon span {
+					width: 156px;
+					margin-left: 4px;
+					float:left; 
+					text-align: center; 
+					font-size: 12px;
+					color: #005DB2;
+				}
+		
+		/* Inicia estilos de elementos de MNTOP */
+		/*--------------------------------------*/
+			#header {
+				width: 100%;
+				/*height: 120px;*/
+				background: url(templates/default/images/header_bk.png) top left repeat-x;
+				overflow: auto;
+
+				height: 100px;
+				
+				//height: 40px;
+				z-index: 0;
+				background: white;
+			}
+				a#TopLogoButton {
+					float:left; background: none; height: 37px; width: 40px; background: url(../Images/MenuLogo.png) top left no-repeat;
+					text-decoration: none;
+					
+					width: 75px;
+					padding-right: 10px;
+					text-align: right;					
+					color: white;
+					line-height: 32px;
+					font-size: 13px;
+				}
+					a#TopLogoButton:hover, a#TopLogoButton.selected {
+						background-color: #9d2620;
+						
+						line-height: 34px;
+					}
+
+				#FindContent{
+					margin-left:10px;
+					border: 3px solid #fff; 
+					border-radius:5px;
+					float:left;
+					background-color:#fff;
+					margin-top:5px;
+					margin-right:50px;
+					width: 50%;
+				}
+				#MenuDes{
+					position: absolute;
+					top:  -12px;
+					left: 5px;
+					z-index: 1000;
+					display: none;
+				}
+				#MenuDes li img{
+					width: 28px;
+					height: 28px;
+				}
+				#Home{
+					height:15px;
+					background-color:#005a9b;
+					clear:0;
+					float:left;
+					position:absolute;
+					top:0px;
+					left:89%;
+					z-index:0;
+				}
+				#UsrMsg{
+					height:25px; 
+					background-color:#005a9b;
+					float:left;
+					position:absolute;
+					top:-3px;
+					left:92%;
+					z-index:0;
+				}
+				#Perfil{
+					height:15px; 
+					background-color:#005b9d; 
+					float:left;
+					position:absolute;
+					top:-3px;
+					left:96%;
+					z-index:0;
+				}
+				#Perfil2{
+					display: none;
+					height:15px; 
+					background-color:#005b9d; 
+					float:left;
+					position:absolute;
+					top:0;
+					left:0;
+					z-index:0;
+				}
+				#ElementsBars{
+					float:right;
+					width:50%;
+				}
+				#ElementsBars div input{
+					width: 90%;
+					float:left;
+					border-left:0px;
+					border-top:0px;
+					border-bottom:0px;
+					border-right:2px solid #e9eaed; 
+					font-size:17px; 
+					color:#aaabaf;
+				}
+				#BarraMenu {
+					float: left;
+					width: 50%;
+					clear:right;
+					margin: 0;
+					padding: 0;
+					position: absolute;
+					left: 0;
+					bottom: 0;
+					background: none;
+					height: 37px;
+
+					/*border-top: 3px solid #c3d3eb;*/
+					background: #005b9d;
+					background: url(templates/default/images/BarraMenus.png) top left repeat-x;
+					/*border-bottom: 3px solid #fdba31;*/
+				}
+					/*
+					#MNTOP_Botones {
+						float: left;
+						margin: 0;
+						padding: 0;
+						position: relative;
+				
+						background: none;
+						height: 37px;
+					}
+					*/
+						#BarraMenu ul {
+							margin : 0; padding : 0; white-space : nowrap; list-style : none;
+							margin-left: 20px;
+							width: 100%;
+							/*padding-left: 3px;*/
+						}
+						#BarraMenu ul li {
+							float : left; 
+							text-align : center;
+							font-size:80%; 
+							height: 37px;
+							background: none;
+							margin-left: 2px;
+							margin-left: 1px;
+							margin-top: 3px;
+							margin-top: 0px;
+							line-height: 26px;
+							
+							/*border-right: 1px solid #00518c;*/
+							border-right: 1px solid #0080de;
+							border-right: 1px solid rgba(255,255,255, 0.2);
+						}
+
+						#BarraMenu ul li a {
+							float: left;
+							padding: 0; 
+							margin: 0;
+							height: 20px;
+							text-decoration: none;
+							height: 37px;
+							
+							font-size: 12px;
+							font-weight: normal;
+						}
+							#BarraMenu ul li a span {
+								float: left; 
+								margin: 0; 
+								padding: 0; 
+								padding-top: 3px;
+								
+								height: 20px;
+								background: transparent none right;
+								
+								color: white;
+								/*color: #E5C243;*/
+							}
+							#BarraMenu ul li a:hover, #BarraMenu ul li a.A_NewMenuOn {
+								background: transparent url(../css/templates/default/images/boton_menu_.png) left 0px;
+								
+								background: #00518c;
+								cursor: pointer;
+								background: transparent url(templates/default/images/boton_menu_.png) left 0px;
+								background: url(templates/default/images/BarraMenus_over.png) top left repeat-x;
+							}
+
+							#BarraMenu ul li a:hover span, #BarraMenu ul li a.A_NewMenuOn span {
+								cursor: pointer; 
+								color: white;
+								/*color: #fee192;*/
+								padding-top: 4px;
+							}
+
+			#MenuFlotante { float:right; margin-top: 28px; margin-right: 8px; }
+				#MenuFlotante ul { list-style: none; font-weight: normal; }
+					#MenuFlotante li { float: left; text-align : left; margin-left : 15px; padding-left: 0px; padding-right: 0px; white-space: nowrap; font-size: 11px; }
+						#MenuFlotante li img { height: 20px; width: 20px; float: left; margin: 0; paddding: 0; margin-right: 3px;}
+						#MenuFlotante a { 
+							/*height: 17px;*/
+							margin: 0;
+							padding: 0;
+							/*line-height: 18px;*/
+							float: left; color: #fff; text-decoration: none; 
+							}
+						#MenuFlotante a:hover { text-decoration: underline; }
+
+						#MenuFlotante {
+							height: 28px;
+							background: none;
+							margin: 0;
+							margin-top: 15px;
+						}
+							#MenuFlotante ul {
+								padding: 0;
+								margin: 0;
+								margin-right: 10px;
+								height: 28px;
+								background: none;
+							}
+							#MenuFlotante ul li {
+								height: 28px;
+								margin-left: 15px;
+								color: #777;
+								color: #506178;
+							}
+
+								#MenuFlotante ul li a {
+									color: #0068b3;
+								}
+									#MenuFlotante ul li a#home {
+										background-image: #1d375b url(../css/templates/default/images/Inicio.png);
+									}
+
+						#InfoFlotante { float:right; border: none; color: white; margin-right: 8px; }
+						#InfoFlotante, #InfoFlotante ul li, #InfoFlotante, #InfoFlotante ul li a { margin: 0; padding: 0; height: 28px; }
+						#InfoFlotante ul { 
+							float:left; 
+							margin-right: 10px;
+							margin-top: 0px; 
+							/*MNTOP Simplificada*/
+							margin-right: 0px;
+						}
+						#InfoFlotante ul li {
+							padding-top: 5px;
+							font-size: 11px;
+							text-transform: Capitalize;
+							position: relative;
+						}
+							
+							#InfoFlotante ul li ul {
+								position: absolute;
+								top: 38px;
+								right: 0;
+								display: none;
+								border: 1px solid #d5d5d5;
+								/*Rojo*/
+								background: #9d2620;
+								/*Tema Blanco*/
+								background: #eee;
+								background: rgba(245, 245, 245, 0.98);
+								
+								border-radius: 4px;
+								border-top-right-radius: 0;
+							}
+								#InfoFlotante ul li:hover ul {
+									display: block;
+								}
+							
+							#InfoFlotante ul li ul li {
+								float: right;
+								clear: both;
+								/*width: 130px;*/
+								height: 30px;
+							}
+							#InfoFlotante ul li ul li img {
+								float: left;
+								margin-top: 3px;
+								margin-right: 10px;
+							}
+							#InfoFlotante ul li ul li a {
+								float: left;
+								padding-left: 10px;
+								width: 150px;
+								color: white;
+								/*Tema Blanco*/
+								color: #0f5496;
+								
+								text-align: left;
+								font-size: 11px;
+							}
+							
+								#InfoFlotante ul li#UserOptions {
+									margin-left: 15px;
+									margin-left: 10px;
+									margin-right: 3px;
+									z-index: 101;
+								}
+									#InfoFlotante ul li#UserOptions a:hover {
+										background: #a92922;
+										/*Tema Blanco*/
+										background: #e5e5e5;
+										background: #e6ebf2;
+									}
+									
+									#InfoFlotante ul li#UserOptions a.UserOptionsButton {
+										font-size: 11px;
+										padding-left: 8px;
+										padding-right: 28px;
+										height: 34px;
+										border: 1px solid transparent;
+										border-bottom: 0;
+										
+										z-index: 2;
+										background: url(../images/ArrowDown.png) right top no-repeat;
+										border-top-left-radius: 4px;
+										border-top-right-radius: 4px;
+										
+										position: relative;
+										top: -1px;
+									}
+									
+									#InfoFlotante ul li#UserOptions:hover a.UserOptionsButton {
+										background-color: #9d2620;
+										background-position: right -34px;
+										/*Tema Blanco*/
+										background-color: #eee;
+										background-color: rgba(245, 245, 245, 0.98);
+										color: #0f5496;
+										
+										border: 1px solid #d5d5d5;
+										border-bottom: 0;
+									}
+									
+
+
+			#Logo {
+				float: left;
+				position: absolute;
+				left: 20px;
+				top: 3px;
+				display: block;
+				/*height: 73px;*/
+				width: 250px;
+				height: 70px;
+				background: transparent url(../images/logo.png) no-repeat;
+			}
+			#Logo a {
+				float: left;
+				display: block;
+				width: 100%;
+				height: 100%;
+				text-decoration: none;
+			}
+		/* Finaliza estilos de elementos de MNTOP */
+		/*----------------------------------------*/
+		
+		
+		/* Inicia estilos de panel izquierdo de navegacion (MNPRI)*/
+		/*--------------------------------------------------------*/
+		div#CuadroNavegacion {
+			font-size: 100%;
+			text-align : left;
+			float : left;
+			width : 100%;
+			background: #e6eaf0;
+			background: none;
+			/*border-right: 1px solid #d3dbe5;*/
+			height: 2000px;
+			padding-top: 5px;
+		}	
+			div#CuadroNavegacion p {
+				float:left;
+				font-size:100%;
+				margin: 10px;
+				margin-bottom: 0;
+				margin-left: 5px;
+				width: 100%;
+				height : 18px;
+				background: none;
+				border-bottom: 2px solid #0068b3;
+				padding-bottom: 2px;
+				/*background: #d3dbe5;*/
+			}
+				div#CuadroNavegacion p a {
+					color: white;
+					font-size: 12px;
+					font-family: Verdana;
+					font-weight : bold;
+					text-decoration: none;
+					color: #0f5496;
+				}
+			div#CuadroNavegacion ul {
+				font-weight : bold;
+				margin-top : 0px;
+				margin-bottom : 0px;
+				/*margin-left : 10px;*/
+				list-style: none;
+				float: left;
+				padding: 0;
+				margin: 5px 10px;
+				width: 100%;
+			}
+				div#CuadroNavegacion li {
+					margin-left : 0px;
+					font-weight : normal;
+					border: none;
+					margin-bottom: 5px;
+					float: left;
+					width: 150px;
+					width: 100%;
+				}
+				div#CuadroNavegacion li a { color : #00498c; text-decoration: none; font-family: Arial; font-size: 12px; }
+					div#CuadroNavegacion li a:hover, CuadroNavegacion li a:active  { text-decoration: underline; color: #f1ad41; }
+
+				div.CuadroNavegacionBordeSuperior, div.CuadroNavegacionBordeInferior { display: none; }
+
+			#MiddleFrame{
+				margin-left:16%;
+				margin-top:0px;
+			}
+			#MNPRIHideContainer {
+				position:absolute; right: 0px; top: 0; display: block; height: 1200px; width: 15px; background-color: white; 
+				border-left: 1px solid #d3dbe5;
+				border-left: 1px solid #d5d5d5;
+			}
+				.BotonEsconder {
+					float: left;
+					width: 15px;
+					height: 105px;
+					display: block;
+					background : white url(../images/barra-esconder.png) no-repeat right top;
+					font-size: 10px;
+					font-weight:bold;
+					cursor: pointer;
+					color: #999999;
+					text-decoration: none;
+					outline:none;
+					text-align:left;
+
+					border: none;
+					padding: 0;
+					margin: 0;
+					margin-top: 300px;
+				}
+		/* Finaliza estilos de panel izquierdo de navegacion (MNPRI)*/
+		/************************************************************/
+
+@media screen and (max-width:1035px){
+	#Home{left:86%;}
+	#UsrMsg{left:90%;}
+	#Perfil{left:95%;}
+}
+@media screen and (max-width:950px){
+	#BarraMenu ul li a {font-size: 10px;}
+	#BarraMenu li a img{height: auto;}
+	#ElementsBars{width:55%;}
+	#ElementsBars div input{width:80%;}
+	#FindContent{width:25%;}
+	#BarraMenu {width: 45%}
+	
+}
+@media screen and (max-width:810px){
+	#BarraMenu ul li a {font-size: 9px;}
+	#BarraMenu li a img{height: auto;}
+	#ElementsBars{width:55%;}
+	#ElementsBars div input{display: none;}
+	#FindContent{width:5%;}
+	#BarraMenu {width: 45%}
+	#BarraMenu ul li a img{display: none;}
+	#Home{left:51%;}
+	#UsrMsg{left:55%;}
+	#Perfil{left:61%;}
+}
+
+@media screen and (max-width:740px){
+	#ElementsBars{width:95%;}
+	#FindContent{width:3%;margin-left: 25px;}
+	#BarraMenu {width: 45%}
+	#BarraMenu  li a img{height: auto;}
+	#Home{left:45%;}
+	#UsrMsg{left:55%;}
+	#Perfil{left:65%;}
+	#BarraMenu{display: none;}
+	#Perfil2{display: block;}
+}
+@media screen and (max-width:600px){
+	#FindContent{width:4%;margin-left: 25px;}
+}
+@media screen and (max-width:450px){
+	#FindContent{width:5%;margin-left: 25px;}
+	#Home{left:40%;}
+	#UsrMsg{left:50%;}
+	#Perfil{left:62%;}
+	#Perfil2{left:-12px;}
+}
+@media screen and (max-width:450px){
+	#FindContent{width:6%;margin-left: 25px;}
+	#Home{left:20%;}
+	#UsrMsg{left:30%;}
+	#Perfil{left:45%;}
+}
+
+
+

@@ -1,0 +1,16 @@
+	
+	.js-disabled-overlay {
+		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; // first!
+		filter: alpha(opacity=50);                                        // second!
+	}
+
+
+	#TRNBlockingDiv {
+		background: white;
+		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; // first!
+		filter: alpha(opacity=40);
+	}
+	
+	#blockingDiv {		
+		background: transparent url(../images/bk_filter_white.png) repeat;
+	}
